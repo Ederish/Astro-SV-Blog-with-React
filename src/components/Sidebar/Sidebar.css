@@ -1,40 +1,88 @@
 .sidebar {
-  position: absolute;
+  position: fixed;
   width: 250px;
-  background-color: #001c35;
   height: 100vh;
+  background-color: #001c35;
   padding: 10px;
   color: #fff;
-  position: fixed;
-  left: -250px; top: 0;
-  z-index:1000;
+  top: 0;
+  left: -250px; /* oculto por defecto */
+  z-index: 1000;
+  transition: left 0.3s ease;
 }
 
-.sidebarList{
-  height:100%;
-  width:100%;
+/* cuando el sidebar está activo */
+.sidebar.open {
+  left: 0;
 }
-.sidebarList .row{
-  width:100%;
-  height:50px;
-  list-style-type:none;
-  margin:0 auto;
-  display: flex;
-  flex-direction: row;
+
+.sidebarList {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  margin-top:25%;
+}
+
+/* FILA */
+.sidebarList .row {
+  width: 100%;
+  list-style: none;
+}
+
+/* SUMMARY */
+details summary {
+  font-weight:bold;
+  padding: 14px 16px;
+  list-style: none;
+  user-select: none;
+}
+
+/* quitar flecha nativa */
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+/* flecha personalizada */
+details summary::after {
+  content: "▼";
+  float: right;
+  font-size: 12px;
+}
+
+details[open] summary::after {
+  content: "▲";
+}
+
+/* hover correcto */
+details summary:hover,
+.link-btn:hover,
+.submenu-btn:hover {
+  text-decoration: underline;
+}
+
+/* SUBMENÚ */
+.submenu {
+  padding-left: 20px;
+}
+li{
+  list-style:none;
+}
+/* botones */
+.link-btn,
+.submenu-btn {
+  width: 100%;
+  background: none;
+  border: none;
   color: #fff;
-  justify-content: left;
-  align-items: left;
-}
-.row :hover{
-  text-decoration: underline #fff;
-  width:100%;
+  padding: 10px 16px;
+  text-align: left;
   cursor: pointer;
+  font-size: 14px;
 }
-.row #icon {
-  flex: 30%;
-  display: grid;
-  place-items: center;
-}
-.row #title {
-  flex: 70%;
+
+/* elimina reglas viejas que rompen el acordeón */
+.row {
+  height: auto;
+  display: block;
 }
